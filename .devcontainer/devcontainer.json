@@ -1,29 +1,19 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers-community/templates/tree/main/src/jupyter-datascience-notebooks
 {
-  "name": "Pytorch Machine Learning Notebook",
+  "name": "Tensorflow Machine Learning Notebook",
   "build": {
     "dockerfile": "Dockerfile"
   },
-  // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
-      "installZsh": "true"
-    },
-    // Python with uv, Ruff, Mypy, MonkeyType and Bandit, installed using pipx
-    "ghcr.io/devcontainers/features/python:1": {
-      "installTools": "true",
-      "toolsToInstall": "uv,ruff,mypy,MonkeyType,bandit"
-    },
-    // git
-    "ghcr.io/devcontainers/features/git:1": {
-      "version": "os-provided",
-      "ppa": "false"
+      "installZsh": "true",
+      "username": "jovyan",
+      "upgradePackages": true
     }
   },
-  // Use base images default CMD.
   "overrideCommand": false,
-  // Forward Jupyter port locally, mark required.
+
   "forwardPorts": [8888],
   "portsAttributes": {
     "8888": {
@@ -32,15 +22,11 @@
       "onAutoForward": "ignore"
     }
   },
-  // Configure tool-specific properties.
   "customizations": {
-    // Configure properties specific to VS Code.
     "vscode": {
-      // Set *default* container specific settings.json values on container create.
       "settings": {
         "python.defaultInterpreterPath": "/opt/conda/bin/python"
       },
-      // Add the IDs of extensions you want installed when the container is created.
       "extensions": [
         "ms-python.python",
         "ms-toolsai.jupyter",
@@ -56,12 +42,5 @@
       ]
     }
   },
-  // Use 'postCreateCommand' to run commands after the container is created.
-  "postCreateCommand": "pip3 install -r requirements.txt",
-
-  // Configure tool-specific properties.
-  // "customizations": {},
-
-  // Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-  "remoteUser": "vscode"
+  "postCreateCommand": "pip3 install --user -r requirements.txt"
 }
